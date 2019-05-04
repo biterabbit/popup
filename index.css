@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.bt {
+  width: 180px;
+  height: 100px;
+  margin: 50px;
+  background: #2972cb
+}
+
+.popup-bg {
+  background: rgb(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+.popup {
+  border: 1px solid #000;
+  position: fixed;
+  height: 200px;
+  width: 200px;
+  top: 100px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.title {
+  background: #ccc;
+  border-bottom: 1px solid #000;
+  height: 30px;
+}
+
+.close,
+.big {
+  float: right;
+  margin: 0 10px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.bottom,
+.left-bottom,
+.right-top,
+.right,
+.top,
+.left,
+.top-left,
+.bottom-right {
+  position: absolute;
+  /* background: red; */
+  /* opacity: 0; */
+}
+
+.top {
+  width: calc(100% - 8px);
+  height: 4px;
+  top: 0;
+  left: 4px;
+  cursor: s-resize
+}
+
+.bottom {
+  width: calc(100% - 8px);
+  height: 4px;
+  left: 4px;
+  bottom: 0;
+  cursor: s-resize
+}
+
+.right {
+  height: calc(100% - 8px);
+  width: 4px;
+  top: 4px;
+  right: 0;
+  cursor: e-resize
+}
+
+.left {
+  height: calc(100% - 8px);
+  width: 4px;
+  top: 4px;
+  left: 0px;
+  cursor: e-resize
+}
+
+.top-left {
+  width: 8px;
+  height: 8px;
+  top: 0;
+  left: 0;
+  cursor: se-resize
+}
+
+.left-bottom {
+  width: 8px;
+  height: 8px;
+  left: 0;
+  bottom: 0;
+  cursor: sw-resize
+}
+
+.bottom-right {
+  width: 8px;
+  height: 8px;
+  right: 0;
+  bottom: 0;
+  cursor: se-resize
+}
+
+.right-top {
+  width: 8px;
+  height: 8px;
+  right: 0;
+  top: 0;
+  cursor: sw-resize
+}
