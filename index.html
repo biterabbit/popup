@@ -141,30 +141,24 @@
         <div class="big">o</div>
       </div>
       内容
-      <div class="top"></div>
-      <div class="top-left"></div>
-      <div class="left"></div>
-      <div class="left-bottom"></div>
-      <div class="bottom"></div>
-      <div class="bottom-right"></div>
-      <div class="right"></div>
-      <div class="right-top"></div>
+      <div class="changebox">
+        <div class="top"></div>
+        <div class="top-left"></div>
+        <div class="left"></div>
+        <div class="left-bottom"></div>
+        <div class="bottom"></div>
+        <div class="bottom-right"></div>
+        <div class="right"></div>
+        <div class="right-top"></div>
+      </div>
     </div>
   </div>
 </body>
 <script>
   window.onload = function () {
 
-    //获取各个边缘
-    const topSide = document.querySelector('.top'),
-      leftSide = document.querySelector('.left'),
-      bottomSide = document.querySelector('.bottom'),
-      rightSide = document.querySelector('.right'),
-      topLeftSide = document.querySelector('.top-left'),
-      leftBottomSide = document.querySelector('.left-bottom'),
-      bottomRightSide = document.querySelector('.bottom-right'),
-      rightTopSide = document.querySelector('.right-top'),
-      resizeList = [topSide, leftSide, bottomSide, rightSide, topLeftSide, leftBottomSide, bottomRightSide, rightTopSide],
+    //获取改变大小边缘的父级盒子
+    const changebox = document.querySelector('.changebox'),
       //获取弹窗
       bt = document.querySelector('.bt'),
       title = document.querySelector('.title'),
@@ -255,7 +249,6 @@
       }
       //改变大小时
       if (isResize) {
-
         switch (switchDirection) {
           case 'top':
             top = nowY
@@ -295,8 +288,8 @@
         //设置最小宽高
         top = top < 0 ? 0 : top;
         left = left < 0 ? 0 : left;
-        height = height < 50 ? 50 : height;
-        width = width < 50 ? 50 : width;
+        height = height < 100 ? 100 : height;
+        width = width < 100 ? 100 : width;
         //设置最大宽高
         top = top > maxResizeTop ? maxResizeTop : top
         left = left > maxResizeLeft ? maxResizeLeft : left
@@ -313,23 +306,23 @@
       }
     })
 
-    //为边框上的每个盒子添加监听
-    resizeList.forEach((i) => {
-      i.addEventListener('mousedown', (e) => {
-        e = e || window.event
-        //获取改变大小前的鼠标位置和弹窗宽高
+    // 使用事件代理为边框上的添加监听
+    changebox.addEventListener('mousedown', (e) => {
+      e = e || window.event
+      //获取改变大小前的鼠标位置和弹窗宽高
+      if (e.target) {
         beforeX = e.pageX
         beforeY = e.pageY
         beforeHeight = popup.clientHeight
         beforeWidth = popup.clientWidth
         //获取选中方向类名
-        switchDirection = i.className
+        switchDirection = e.target.className
         //获取鼠标距离边缘的距离
         leftbox = e.pageX - popup.offsetLeft
         topbox = e.pageY - popup.offsetTop
         //改变大小时的最大范围，50为设置的最小弹窗大小，2为2倍边框宽度
-        maxResizeTop = popup.offsetTop + popup.clientHeight - 50
-        maxResizeLeft = popup.offsetLeft + popup.clientWidth - 50
+        maxResizeTop = popup.offsetTop + popup.clientHeight - 100
+        maxResizeLeft = popup.offsetLeft + popup.clientWidth - 100
         maxResizeHeight = popup.offsetTop + popup.clientHeight - 2
         maxResizeWidth = popup.offsetLeft + popup.clientWidth - 2
         isResize = true
@@ -358,7 +351,7 @@
             maxResizeWidth = document.documentElement.clientWidth - popup.offsetLeft - 2
             break;
         }
-      })
+      }
     })
 
     //阻止默认行为和事件冒泡，缺少会导致误触发drag事件，使得mouseup失效
