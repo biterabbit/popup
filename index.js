@@ -1,7 +1,7 @@
 window.onload = function () {
 
   //获取改变大小边缘的父级盒子
-  const changebox = document.querySelector('.changebox'),
+  var changebox = document.querySelector('.changebox'),
     //获取弹窗
     bt = document.querySelector('.bt'),
     title = document.querySelector('.title'),
@@ -9,19 +9,19 @@ window.onload = function () {
     popupBg = document.querySelector('.popup-bg'),
     big = document.querySelector('.big'),
     close = document.querySelector('.close');
-  let isDrag = false,//拖动标志
+  var isDrag = false,//拖动标志
     isResize = false,//改变大小标志
     isBig = false;
-  let leftbox, topbox, beforeX, beforeY, beforeHeight, beforeWidth, nowX, nowY, maxLeft, maxTop,
+  var leftbox, topbox, beforeX, beforeY, beforeHeight, beforeWidth, nowX, nowY, maxLeft, maxTop,
     switchDirection, width, height, top, left, orginal;
 
   //弹窗按钮
-  bt.addEventListener('click', () => {
+  bt.addEventListener('click', function () {
     popupBg.style.display = 'block'
     popup.style.left = (document.documentElement.clientWidth - popup.offsetWidth) / 2 + 'px'
   })
   //最大化按钮
-  big.addEventListener('click', () => {
+  big.addEventListener('click', function () {
     if (isBig) {
       //恢复最大化前的位置和大小
       popup.style.top = orginal.top
@@ -46,7 +46,7 @@ window.onload = function () {
 
   })
   //关闭按钮
-  close.addEventListener('click', () => {
+  close.addEventListener('click', function () {
     popupBg.style.display = 'none'
   })
   //弹窗背景盒子初始化
@@ -54,7 +54,7 @@ window.onload = function () {
   popupBg.style.width = document.documentElement.clientWidth + 'px'
 
   //鼠标按下选中弹窗标题变为可拖动,同时获取鼠标据弹窗左和上的距离及可拖动的最大距离
-  title.addEventListener('mousedown', (e) => {
+  title.addEventListener('mousedown', function (e) {
     e = e || window.event
     maxTop = document.documentElement.clientHeight - popup.offsetHeight
     maxLeft = document.documentElement.clientWidth - popup.offsetWidth
@@ -64,13 +64,13 @@ window.onload = function () {
   })
 
   //鼠标松开,变为不可拖动和拖拽改变大小
-  document.addEventListener('mouseup', () => {
+  document.addEventListener('mouseup', function () {
     isDrag = false
     isResize = false
   })
 
   //鼠标移动时改变大小或拖动弹窗
-  document.addEventListener('mousemove', (e) => {
+  document.addEventListener('mousemove', function (e) {
     e = e || window.event
     //阻止事件默认行为和事件冒泡
     pauseEvent(e)
@@ -150,7 +150,7 @@ window.onload = function () {
   })
 
   // 使用事件代理为边框上的添加监听
-  changebox.addEventListener('mousedown', (e) => {
+  changebox.addEventListener('mousedown', function (e) {
     e = e || window.event
     //获取改变大小前的鼠标位置和弹窗宽高
     if (e.target) {
